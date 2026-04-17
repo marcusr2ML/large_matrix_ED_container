@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+#SBATCH --time=04:00:00
+#SBATCH --nodes=1
+#SBATCH --exclusive
+#SBATCH --mem=0
+#SBATCH --mincpus=63
+#SBATCH --job-name=Batchspec
+#SBATCH --partition=physics,secondary,IllinoisComputes
+#SBATCH --account=marcusr2-ic
+#SBATCH --output=spec.o%j
+##SBATCH --error=fac.e%j
+##SBATCH --mail-user=marcusr2@illinois.edu
+##SBATCH --mail-type=BEGIN,END
+#
+# End of embedded SBATCH options
+#
+
+
+# Usage: sbatch Job_fft.sbash <N> <result directory> <output name> <ee>
+
+module load miniconda3
+source activate base
+
+
+stdbuf --output=L python3 BatchKw_fft_2.py $1 $2 $3 $4
